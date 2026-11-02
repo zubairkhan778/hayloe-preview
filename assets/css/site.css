@@ -1,0 +1,136 @@
+/* Hayloe squeeze page. One goal: collect the email.
+   Brand: cream surfaces, coral brand moments, ginger accents; Fraunces headline, Manrope text. */
+
+@font-face { font-family: "Fraunces"; src: url("../fonts/fraunces-semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("../fonts/manrope-regular.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("../fonts/manrope-semibold.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("../fonts/manrope-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Manrope"; src: url("../fonts/manrope-extrabold.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
+:root {
+  --coral: #E86A4B;
+  --coral-hover: #D95E40;
+  --cream: #FAF6F0;
+  --white: #FFFFFF;
+  --ginger: #D29A53;
+  --brown: #4A342E;
+  --text-soft: rgba(74, 52, 46, .78);
+  --rule: rgba(74, 52, 46, .16);
+  --serif: "Fraunces", Georgia, serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.22, .9, .24, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--cream); color: var(--brown); font-family: var(--sans); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, svg { display: block; max-width: 100%; }
+p, h1, h2 { margin: 0; }
+h1, h2 { font-weight: 400; }
+.sr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+:focus-visible { outline: 3px solid var(--ginger); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- Hero: the product photo with the headline sitting on it ---------- */
+/* The photo's background is the page cream, so photo, words and sign up read as one piece */
+.hero { --hero-h: clamp(480px, min(56.25vw, calc(100svh - 270px)), 1100px); position: relative; overflow: hidden; background: var(--cream); }
+.hero__img { display: block; position: relative; overflow: hidden; }
+.hero__img::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 80px; background: linear-gradient(to bottom, rgba(250, 246, 240, 0), var(--cream)); pointer-events: none; }
+.hero__img img {
+  width: 100%;
+  height: var(--hero-h);
+  object-fit: cover; object-position: 72% 55%;
+  animation: settle 1.8s var(--ease) both;
+}
+/* Logo centred at the top */
+.top { position: absolute; z-index: 2; top: clamp(20px, 3vw, 36px); left: 0; right: 0; display: flex; justify-content: center; }
+.logo { display: block; width: clamp(84px, 7vw, 108px); }
+.logo svg { width: 100%; height: auto; }
+/* Centred over the calm left side of the photo, as on the Harry's page */
+.hero__copy {
+  position: absolute; top: calc(var(--hero-h) / 2); left: 2vw;
+  transform: translateY(-50%);
+  width: 58vw; padding: 0 2vw; text-align: center;
+}
+.hero__title {
+  font-family: var(--serif); font-weight: 600; color: var(--coral); white-space: nowrap;
+  font-size: clamp(2.4rem, 4.6vw, 5rem); line-height: 1.05; letter-spacing: -.02em;
+  font-variation-settings: "SOFT" 50, "WONK" 0;
+}
+/* Option B: Manrope, sentence case */
+[data-font="b"] .hero__title { font-family: var(--sans); font-weight: 800; letter-spacing: -.035em; }
+/* Option C: Manrope, spaced capitals */
+[data-font="c"] .hero__title { font-family: var(--sans); font-weight: 800; text-transform: uppercase; letter-spacing: .08em; font-size: clamp(1.9rem, 3.5vw, 3.8rem); }
+.hero__lede { margin-top: clamp(22px, 3.2vh, 36px); font-size: clamp(1.05rem, 1.4vw, 1.375rem); font-weight: 600; line-height: 1.5; color: var(--brown); }
+.hero__note { margin-top: clamp(28px, 4vh, 48px); font-size: clamp(.95rem, 1.1vw, 1.0625rem); color: var(--text-soft); }
+.hero__lede, .hero__note { text-wrap: balance; }
+.hero__copy > * { animation: rise .9s var(--ease) both; }
+.hero__copy > :nth-child(2) { animation-delay: .1s; }
+.hero__copy > :nth-child(3) { animation-delay: .2s; }
+
+/* ---------- Sign up: the halo stands where Harry's had its key ---------- */
+.join { padding: clamp(8px, 1.5vw, 20px) 20px clamp(44px, 6vw, 72px); text-align: center; }
+.join__logo { display: none; width: 104px; height: auto; margin: 0 auto 12px; }
+/* Option: ?logo=b moves the logo down to stand in for the halo above the sign up */
+[data-logo="b"] .top, [data-logo="b"] .join__halo { display: none; }
+[data-logo="b"] .join__logo { display: block; }
+.join__halo { width: 60px; margin: 0 auto 12px; fill: var(--ginger); animation: float 4.5s ease-in-out infinite; overflow: visible; }
+.join__title { font-size: .8125rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--brown); }
+.signup { display: flex; justify-content: center; gap: 8px; margin: 20px auto 0; max-width: 520px; }
+.signup input {
+  flex: 1; min-width: 0; height: 48px; padding: 0 18px;
+  border: 1.5px solid var(--rule); border-radius: 8px; background: var(--white);
+  font: 400 1rem var(--sans); color: var(--brown);
+  transition: border-color .2s, box-shadow .2s;
+}
+.signup input::placeholder { color: rgba(74, 52, 46, .5); }
+.signup input:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 4px rgba(232, 106, 75, .18); }
+.btn {
+  height: 48px; min-width: 64px; padding: 0 26px; border: 0; border-radius: 8px;
+  background: var(--coral); color: var(--white); font: 600 1rem/1 var(--sans); letter-spacing: .01em;
+  cursor: pointer; white-space: nowrap; transition: background-color .2s, transform .25s var(--ease);
+}
+.btn:hover { background: var(--coral-hover); transform: translateY(-1px); }
+.signup[hidden] { display: none; }
+.signup.is-busy .btn { opacity: .65; pointer-events: none; }
+.signup__error { margin-top: 12px; font-size: .875rem; font-weight: 600; color: #B8401F; }
+.join__done { max-width: 30em; margin: 18px auto 0; font-size: 1.0625rem; font-weight: 600; line-height: 1.5; animation: rise .6s var(--ease) both; }
+.join__done[hidden] { display: none; }
+
+.foot { padding: 0 20px 28px; text-align: center; font-size: .8125rem; color: var(--text-soft); }
+
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes settle { from { transform: scale(1.04); } }
+@keyframes float { 50% { transform: translateY(-4px); } }
+.hero__copy > * { will-change: transform; }
+
+/* ---------- Phones: headline first, then the jar and its fruit corner ---------- */
+/* One continuous column: words and sign up on the empty cream, the jar resting underneath */
+@media (max-width: 760px) {
+  .hero { display: flex; flex-direction: column; }
+  .top { position: static; padding: 20px 20px 0; }
+  .logo { width: 84px; }
+  .hero__copy { position: static; transform: none; width: auto; padding: 22px 16px 0; order: 1; }
+  .join { order: 3; padding: 4px 20px 36px; }
+  .hero__copy, .join { position: relative; top: auto; left: auto; z-index: 1; }
+  .join__halo { width: 48px; margin-bottom: 8px; }
+  .join__logo { width: 92px; margin-bottom: 10px; }
+  [data-logo="b"] .hero__copy { padding-top: 40px; }
+  .join__title { font-size: .75rem; }
+  .signup { margin-top: 14px; }
+  .signup input { flex: none; width: 100%; }
+  .hero__img { order: 2; margin-top: 10px; }
+  .hero__img::after { display: none; }
+  /* on short phones the photo gives way so the sign up stays on the first screen */
+  .hero__img img { width: auto; max-width: 100%; height: auto; max-height: max(200px, calc(100svh - 420px)); margin: 0 auto; aspect-ratio: 2048 / 1550; animation: none; }
+  .hero__lede { margin-top: 18px; }
+  .hero__note { margin-top: 18px; }
+  .hero__title { font-size: clamp(1.9rem, 9.6vw, 2.8rem); }
+  [data-font="c"] .hero__title { font-size: clamp(1.4rem, 6.6vw, 2rem); }
+  .hero__lede { font-size: clamp(.78rem, 3.75vw, 1rem); }
+  .signup { flex-direction: column; }
+  .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /source/
+
+Sitemap: https://hayloe.co/sitemap.xml
